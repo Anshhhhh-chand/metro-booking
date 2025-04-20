@@ -5,56 +5,518 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metro Ticket - MetroGo</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        
         .ticket-container {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0;
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        
+        /* .ticket-header {
+            background: linear-gradient(135deg, #2196f3, #0d47a1);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        } */
+
+        .ticket-header {
+    background: linear-gradient(135deg, #2196f3, #0d47a1);
+    color: white;
+    padding: 40px 40px 40px; /* Increase top padding */
+    text-align: center;
+    position: relative;
+}
+
+        
+        .ticket-logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .ticket-title {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .ticket-booking-id {
+            background-color: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .ticket-body {
+            padding: 30px;
+        }
+        
+        .ticket-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        .journey-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .journey-point {
+            flex: 1;
             text-align: center;
         }
-        .ticket-header {
-            font-size: 24px;
+        
+        .station-name {
+            font-size: 20px;
             font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .station-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .journey-direction {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            font-size: 24px;
+            color: #2196f3;
+        }
+        
+        .journey-info {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            flex: 1;
+            min-width: 150px;
+            margin-bottom: 15px;
+        }
+        
+        .info-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .passenger-info {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .payment-info {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+        
+        .price-details {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 10px;
         }
-        .ticket-details {
-            text-align: left;
+        
+        .total-amount {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: right;
+            color: #333;
+        }
+        
+        .ticket-footer {
+            padding: 20px;
+            background-color: #f5f5f5;
+            text-align: center;
+            border-top: 1px dashed #ccc;
+        }
+        
+        .barcode {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .barcode img {
+            max-width: 90%;
+            height: 70px;
+        }
+        
+        .ticket-notes {
+            font-size: 12px;
+            color: #666;
+            margin: 10px 0;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
             margin-top: 20px;
         }
-        .ticket-details p {
-            margin: 8px 0;
+        
+        .print-btn, .cancel-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
             font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
+        
         .print-btn {
             background-color: #2196f3;
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: background-color 0.3s;
         }
+        
         .print-btn:hover {
-            background-color: #0b7dda;
+            background-color: #0d8aee;
+        }
+        
+        .cancel-btn {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #eee;
+        }
+        
+        @media print {
+            .actions {
+                display: none;
+            }
+            
+            body {
+                background-color: #fff;
+            }
+            
+            .ticket-container {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .journey-details {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .journey-direction {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+            
+            .info-item {
+                min-width: 120px;
+            }
+        }
+        
+        /* Added circular decorations for a more ticket-like feel */
+        .ticket-body:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -12px;
+            width: 24px;
+            height: 24px;
+            background-color: #f5f5f5;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .ticket-body {
+            position: relative;
         }
     </style>
 </head>
 <body>
-    <div class="ticket-container">
-        <div class="ticket-header">MetroGo Ticket</div>
-        <div id="ticketContent" class="ticket-details"></div>
-        <button class="print-btn" onclick="window.print()">Print Ticket</button>
-        <button onclick="window.location.href='cancellation.html'">Cancel Ticket</button>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>MetroGo</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="reservation.html">Book Ticket</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cancellation.html">Cancel Ticket</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
 
+    <div class="ticket-container">
+        <div class="ticket-header">
+            <div class="ticket-logo">MetroGo</div>
+            <div class="ticket-title">E-Ticket / Booking Confirmation</div>
+            <div class="ticket-booking-id" id="bookingId">Booking #MG-12345678</div>
+        </div>
+        
+        <div class="ticket-body">
+            <div class="ticket-section">
+                <h3 class="section-title">Journey Details</h3>
+                <div class="journey-details">
+                    <div class="journey-point">
+                        <div class="station-label">From</div>
+                        <div class="station-name" id="fromStation">Station 1</div>
+                    </div>
+                    
+                    <div class="journey-direction">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="journey-point">
+                        <div class="station-label">To</div>
+                        <div class="station-name" id="toStation">Station 2</div>
+                    </div>
+                </div>
+                
+                <div class="journey-info">
+                    <div class="info-item">
+                        <div class="info-label">Date</div>
+                        <div class="info-value" id="journeyDate">April 14, 2025</div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-label">Time</div>
+                        <div class="info-value" id="journeyTime">10:30 AM</div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-label">Ticket Type</div>
+                        <div class="info-value" id="ticketType">Single Journey</div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-label">Passengers</div>
+                        <div class="info-value" id="numPassengers">1</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ticket-section">
+                <h3 class="section-title">Passenger Information</h3>
+                <div class="passenger-info">
+                    <div class="info-item">
+                        <div class="info-label">Name</div>
+                        <div class="info-value" id="passengerName">John Doe</div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value" id="email">john.doe@example.com</div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value" id="phone">+1 234-567-8900</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ticket-section">
+                <h3 class="section-title">Payment Details</h3>
+                <div class="payment-info">
+                    <div class="price-details">
+                        <span>Base Fare</span>
+                        <span id="baseFare">₹200</span>
+                    </div>
+                    
+                    <div class="price-details">
+                        <span>Service Fee</span>
+                        <span id="serviceFee">₹20</span>
+                    </div>
+                    
+                    <div class="price-details">
+                        <span>Taxes</span>
+                        <span id="taxAmount">₹30</span>
+                    </div>
+                    
+                    <div class="total-amount">
+                        Total: <span id="totalAmount">₹250</span>
+                    </div>
+                    
+                    <div class="info-item" style="margin-top: 15px;">
+                        <div class="info-label">Payment Method</div>
+                        <div class="info-value" id="paymentMethod">Credit Card</div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-label">Payment Status</div>
+                        <div class="info-value" style="color: green;">
+                            <i class="fas fa-check-circle"></i> Confirmed
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="barcode">
+                <img src="/api/placeholder/400/70" alt="Barcode">
+            </div>
+            
+            <div class="ticket-notes">
+                <p>Please show this ticket on your mobile device or as a printout at the metro station entrance.</p>
+                <p>This ticket is valid only for the date and time mentioned above.</p>
+            </div>
+        </div>
+        
+        <div class="ticket-footer">
+            <div class="actions">
+                <button class="print-btn" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print Ticket
+                </button>
+                <button class="cancel-btn" onclick="window.location.href='cancellation.html?cancelId=MG-12345678'">
+                    <i class="fas fa-times"></i> Cancel Ticket
+                </button>
+            </div>
+        </div>
     </div>
 
-    <script src="js/ticket.js"></script>
-    <li><a href="cancellation.html">Cancel Ticket</a></li>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to get URL parameters
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
+        // Get booking ID from URL or use default
+        const bookingId = getUrlParam('bookingId') || 'MG-12345678';
+
+        // Fetch booking data from localStorage
+        let bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+        let booking = bookings.find(b => b.bookingId === bookingId);
+
+        // Get payment data from localStorage
+        let paymentData = JSON.parse(localStorage.getItem('ticketData') || '{}');
+
+        if (booking) {
+            // Update ticket details with booking data
+            document.getElementById('bookingId').textContent = `Booking #${booking.bookingId}`;
+            document.getElementById('fromStation').textContent = booking.fromStation;
+            document.getElementById('toStation').textContent = booking.toStation;
+
+            // Format date for display
+            const journeyDate = new Date(booking.journeyDate);
+            const options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('journeyDate').textContent = journeyDate.toLocaleDateString('en-US', options);
+            
+            // Format time for display
+            document.getElementById('journeyTime').textContent = booking.journeyTime;
+            
+            document.getElementById('ticketType').textContent = booking.ticketType.replace(/^\w/, c => c.toUpperCase());
+            document.getElementById('numPassengers').textContent = booking.numPassengers;
+            document.getElementById('passengerName').textContent = booking.passengerName;
+            document.getElementById('email').textContent = booking.email;
+            document.getElementById('phone').textContent = booking.phone;
+
+            // Calculate fare based on ticket type and number of passengers
+            let baseFare = 0;
+            switch(booking.ticketType) {
+                case 'single':
+                    baseFare = 150;
+                    break;
+                case 'return':
+                    baseFare = 250;
+                    break;
+                case 'dayPass':
+                    baseFare = 300;
+                    break;
+                default:
+                    baseFare = 150;
+            }
+
+            // Multiply by number of passengers
+            baseFare = baseFare * parseInt(booking.numPassengers);
+            
+            // Calculate fees and total
+            const serviceFee = Math.round(baseFare * 0.1); // 10% service fee
+            const taxAmount = Math.round(baseFare * 0.15); // 15% tax
+            const totalAmount = baseFare + serviceFee + taxAmount;
+            
+            // Update payment details
+            document.getElementById('baseFare').textContent = `₹${baseFare}`;
+            document.getElementById('serviceFee').textContent = `₹${serviceFee}`;
+            document.getElementById('taxAmount').textContent = `₹${taxAmount}`;
+            document.getElementById('totalAmount').textContent = `₹${totalAmount}`;
+            
+            // If we have payment method from payment page, use it
+            if (paymentData.paymentMethod) {
+                let paymentMethodText = '';
+                switch(paymentData.paymentMethod) {
+                    case 'card':
+                        paymentMethodText = 'Credit/Debit Card';
+                        break;
+                    case 'upi':
+                        paymentMethodText = 'UPI';
+                        break;
+                    case 'netbanking':
+                        paymentMethodText = 'Net Banking';
+                        break;
+                    case 'wallet':
+                        paymentMethodText = 'Digital Wallet';
+                        break;
+                    default:
+                        paymentMethodText = 'Online Payment';
+                }
+                document.getElementById('paymentMethod').textContent = paymentMethodText;
+            }
+        } else {
+            // If no booking found, show demo data or error message
+            alert('Booking information not found. Showing sample ticket data.');
+        }
+    });
+    </script>
 </body>
 </html>
