@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Ticket - MetroGo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/cancellation.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>MetroGo</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="reservation.html">Book Ticket</a></li>
+            <li><a href="cancellation.html" class="active">Cancel Ticket</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Cancel Your Ticket</h2>
+        <form id="cancellationForm">
+            <label for="bookingId">Booking ID:</label>
+            <input type="text" id="bookingId" required>
+            <button type="submit">Cancel Ticket</button>
+        </form>
+        <p id="message"></p>
+    </div>
+</body>
+</html>

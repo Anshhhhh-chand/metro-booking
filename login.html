@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MetroGo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>MetroGo</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html" class="active">Login</a></li>
+            <li><a href="reservation.html">Book Ticket</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="form-container">
+        <h2>Login to Your Account</h2>
+        <form id="loginForm" onsubmit="return handleLogin(event)">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="remember"> Remember me
+                </label>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <p class="register-link">
+            Don't have an account? <a href="#" onclick="showRegisterForm()">Register here</a>
+        </p>
+    </div>
+
+    <!-- Register Form (Hidden by default) -->
+    <div class="form-container" id="registerForm" style="display: none;">
+        <h2>Create New Account</h2>
+        <form id="registerFormElement" onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email Address</label>
+                <input type="email" id="registerEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+        <p class="register-link">
+            Already have an account? <a href="#" onclick="showLoginForm()">Login here</a>
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="reservation.html">Book Ticket</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@metrogosystem.com</p>
+                <p>Phone: 1-800-METRO</p>
+                <p>Address: 123 Metro Street, City</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;2025 MetroGo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Verify script loading
+        console.log('Login page loaded');
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded');
+            // Verify form elements
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const registerFormElement = document.getElementById('registerFormElement');
+            console.log('Login form found:', !!loginForm);
+            console.log('Register form container found:', !!registerForm);
+            console.log('Register form element found:', !!registerFormElement);
+
+            // Add form submission listener for debugging
+            if (registerFormElement) {
+                registerFormElement.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    console.log('Register form submitted via listener');
+                    const formData = {
+                        fullName: document.getElementById('fullName').value,
+                        email: document.getElementById('registerEmail').value,
+                        password: document.getElementById('registerPassword').value,
+                        confirmPassword: document.getElementById('confirmPassword').value
+                    };
+                    console.log('Form data:', formData);
+                    handleRegister(e);
+                });
+            }
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html> 

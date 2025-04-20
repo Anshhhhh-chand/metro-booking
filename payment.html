@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - MetroGo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .payment-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        .payment-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        #paymentForm {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            width: 100%;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border 0.3s ease;
+        }
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            gap: 15px;
+        }
+        .payment-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .payment-option input {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        .payment-option label {
+            cursor: pointer;
+        }
+        .error-message {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 5px;
+            display: block;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .hidden {
+            display: none;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+        .payment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .payment-header .secure-badge {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            color: #28a745;
+            font-size: 14px;
+        }
+        .secure-badge svg {
+            margin-right: 5px;
+        }
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .card-icons span {
+            font-size: 24px;
+            color: #6c757d;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .input-wrapper .icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        .countdown {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #6c757d;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><h1>MetroGo</h1></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="reservation.html">Book Ticket</a></li>
+            <li><a href="payment.html" class="active">Payment</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section class="payment-section">
+        <h2>Complete Your Payment</h2>
+        <div class="success-message" id="payment-success"></div>
+        
+        <form id="paymentForm">
+            <div class="payment-header">
+                <h3>Choose Payment Method</h3>
+                <div class="secure-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                    </svg>
+                    Secure Payment
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" id="card-payment" name="payment-method" value="card" checked>
+                        <label for="card-payment">Credit/Debit Card</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="upi-payment" name="payment-method" value="upi">
+                        <label for="upi-payment">UPI</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="netbanking-payment" name="payment-method" value="netbanking">
+                        <label for="netbanking-payment">Net Banking</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="wallet-payment" name="payment-method" value="wallet">
+                        <label for="wallet-payment">Wallet</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="card-details" class="form-group">
+                <div class="card-icons">
+                    <span>💳</span>
+                    <span>🔒</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <div class="input-wrapper">
+                        <input type="text" placeholder="XXXX XXXX XXXX XXXX" id="card-number" maxlength="19">
+                    </div>
+                    <span class="error-message" id="card-number-error"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-name">Name on Card</label>
+                    <input type="text" placeholder="Enter cardholder name" id="card-name">
+                    <span class="error-message" id="card-name-error"></span>
+                </div>
+                
+                <div style="display: flex; gap: 15px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="expiry-date">Expiry Date</label>
+                        <input type="text" placeholder="MM/YY" id="expiry-date" maxlength="5">
+                        <span class="error-message" id="expiry-date-error"></span>
+                    </div>
+                    
+                    <div class="form-group" style="flex: 1;">
+                        <label for="cvv">CVV</label>
+                        <div class="input-wrapper">
+                            <input type="password" placeholder="XXX" id="cvv" maxlength="3">
+                        </div>
+                        <span class="error-message" id="cvv-error"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="upi-details" class="form-group hidden">
+                <label for="upi-id">UPI ID</label>
+                <input type="text" placeholder="username@bank" id="upi-id">
+                <span class="error-message" id="upi-id-error"></span>
+            </div>
+            
+            <div id="netbanking-details" class="form-group hidden">
+                <label for="bank">Select Bank</label>
+                <select id="bank">
+                    <option value="">--Select Bank--</option>
+                    <option value="sbi">State Bank of India</option>
+                    <option value="hdfc">HDFC Bank</option>
+                    <option value="icici">ICICI Bank</option>
+                    <option value="axis">Axis Bank</option>
+                    <option value="pnb">Punjab National Bank</option>
+                    <option value="kotak">Kotak Mahindra Bank</option>
+                </select>
+                <span class="error-message" id="bank-error"></span>
+            </div>
+            
+            <div id="wallet-details" class="form-group hidden">
+                <label for="wallet-provider">Select Wallet Provider</label>
+                <select id="wallet-provider">
+                    <option value="">--Select Wallet--</option>
+                    <option value="paytm">Paytm</option>
+                    <option value="phonepe">PhonePe</option>
+                    <option value="amazonpay">Amazon Pay</option>
+                    <option value="gpay">Google Pay</option>
+                    <option value="mobikwik">MobiKwik</option>
+                </select>
+                <span class="error-message" id="wallet-error"></span>
+                
+                <div id="wallet-phone-container" class="form-group hidden">
+                    <label for="wallet-phone">Mobile Number</label>
+                    <input type="tel" placeholder="Enter registered mobile number" id="wallet-phone">
+                    <span class="error-message" id="wallet-phone-error"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="text" id="amount" value="" readonly>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="payment-button">Proceed to Pay </button>
+            
+            <div class="countdown hidden" id="countdown-timer">
+                Completing transaction...
+            </div>
+        </form>
+    </section>
+    
+    <script src="js/payment.js"></script>
+    <li><a href="cancellation.html">Cancel Ticket</a></li>
+
+</body>
+</html>

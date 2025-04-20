@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - MetroGo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>MetroGo</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="reservation.html">Book Ticket</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Confirmation Section -->
+    <div class="confirmation-container">
+        <div class="confirmation-content">
+            <!-- Success Message -->
+            <div class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h2>Booking Confirmed!</h2>
+                <p>Your ticket has been successfully booked.</p>
+            </div>
+
+            <!-- Ticket Details -->
+            <div class="ticket-details">
+                <div class="ticket-header">
+                    <h3>MetroGo Ticket</h3>
+                    <div class="ticket-id">
+                        <span>Ticket ID:</span>
+                        <span id="bookingId"></span>
+                    </div>
+                </div>
+
+                <div class="ticket-body">
+                    <div class="journey-details">
+                        <div class="station">
+                            <div class="station-name" id="fromStation"></div>
+                            <div class="station-time" id="journeyTime"></div>
+                        </div>
+                        <div class="journey-line">
+                            <div class="line"></div>
+                            <div class="train-icon">
+                                <i class="fas fa-train"></i>
+                            </div>
+                        </div>
+                        <div class="station">
+                            <div class="station-name" id="toStation"></div>
+                            <div class="station-time" id="journeyDate"></div>
+                        </div>
+                    </div>
+
+                    <div class="passenger-details">
+                        <div class="detail-item">
+                            <span>Passenger Name:</span>
+                            <span id="passengerName"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Ticket Type:</span>
+                            <span id="ticketType"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span>Amount Paid:</span>
+                            <span id="totalAmount"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ticket-footer">
+                    <div class="qr-code">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <div class="ticket-actions">
+                        <button onclick="printTicket()" class="action-btn">
+                            <i class="fas fa-print"></i> Print Ticket
+                        </button>
+                        <button onclick="downloadTicket()" class="action-btn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="additional-info">
+                <h3>Important Information</h3>
+                <ul>
+                    <li>Please arrive at the station at least 15 minutes before departure time.</li>
+                    <li>Keep your ticket ready for inspection during the journey.</li>
+                    <li>This ticket is valid only for the specified date and time.</li>
+                    <li>For any assistance, please contact our customer support.</li>
+                </ul>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="index.html" class="btn primary">Back to Home</a>
+                <a href="tickets.html" class="btn secondary">View All Tickets</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="reservation.html">Book Ticket</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@metrogosystem.com</p>
+                <p>Phone: 1-800-METRO</p>
+                <p>Address: 123 Metro Street, City</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;2025 MetroGo. All rights reserved.</p><p>Developed by ABV-IIITM Gwalior Students</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/confirmation.js"></script>
+</body>
+</html> 
